@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   Projectile: {fileID: 5886617163244570368, guid: c512600092961334aa438a51ddc53e7f, type: 3}
   Damage: 25
-  ShootForce: 1300
+  ShootSpeed: 30
   FireRate: 200
   WeaponType: 0
+  ProjectilePattern: 0

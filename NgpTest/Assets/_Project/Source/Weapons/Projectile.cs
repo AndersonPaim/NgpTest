@@ -6,48 +6,64 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float _lifeTime;
 
-    private WeaponData _weaponData;
+    protected WeaponData WeaponData;
     private Rigidbody _rb;
 
-    public void Launch(WeaponData weaponData)
+    public virtual void Launch(WeaponData weaponData)
     {
-        _weaponData = weaponData;
-        _rb.AddForce(transform.forward * weaponData.ShootForce);
+        WeaponData = weaponData;
+        //_spawnPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        //_rb.AddForce(transform.forward * weaponData.ShootForce);
         DestroyDelay();
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _rb.linearVelocity = Vector3.zero;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
 
         if (damageable != null)
         {
-            damageable.TakeDamage(_weaponData.Damage);
+            damageable.TakeDamage(WeaponData.Damage);
         }
 
         DestroyProjectile();
     }
 
-    private async void DestroyDelay()
+    protected virtual async void DestroyDelay()
     {
         await UniTask.Delay(TimeSpan.FromSeconds(_lifeTime));
 
         DestroyProjectile();
     }
 
-    private void DestroyProjectile()
+    protected virtual void DestroyProjectile()
     {
-        //TODO PLAY PARTICLE
         gameObject.SetActive(false);
     }
+
+    /*private void Update()
+    {
+        if (_hasInitialized)
+            BulletRotation();
+    }
+
+    private void BulletRotation()
+    {
+        _timer += Time.deltaTime;
+
+        float x = _timer * WeaponData.CurveSpeed * transform.right.x;
+        float y = _timer * WeaponData.CurveSpeed * transform.right.y;
+        Vector3 newPos = new(x + _spawnPoint.x, transform.eulerAngles.y, y + _spawnPoint.y);
+        transform.position = newPos;
+    }*/
 }

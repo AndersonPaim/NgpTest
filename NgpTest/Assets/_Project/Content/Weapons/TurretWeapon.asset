@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee45dca52f41e504692928f1af00d743, type: 3}
+  m_Name: TurretWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  Projectile: {fileID: 5886617163244570368, guid: 9a3bb77dd94fbf842a6aa27d431682f3, type: 3}
+  Damage: 15
+  ShootSpeed: 10
+  FireRate: 20
+  WeaponType: 0
+  ProjectilePattern: 1

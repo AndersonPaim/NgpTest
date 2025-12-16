@@ -1,13 +1,32 @@
+using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     [SerializeField] private WeaponController _weaponController;
+    [SerializeField] private DamageFeedback _damageFeedback;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private int _hp;
 
     private PlayerInputActions _input;
     private Rigidbody _rb;
+
+    public void TakeDamage(int damage)
+    {
+        _hp -= damage;
+
+        if (_hp <= 0)
+        {
+            _damageFeedback.Kill();
+        }
+        else
+        {
+            _damageFeedback.Damage();
+        }
+    }
 
     private void Start()
     {

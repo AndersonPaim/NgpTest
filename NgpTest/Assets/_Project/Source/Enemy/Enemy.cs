@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    protected virtual async void Kill()
+    protected virtual void Kill()
     {
         _damageFeedback.Kill();
         gameObject.SetActive(false);

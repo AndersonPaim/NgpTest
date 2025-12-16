@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Digi.VisualScreen;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -26,6 +25,8 @@ public class WeaponController : MonoBehaviour
 
         if (projectile != null)
         {
+            Vector3 projectileDir = _shootPosition.forward * _weaponData.ShootSpeed;
+            projectile.GetComponent<Rigidbody>().linearVelocity = projectileDir;
             projectile.Launch(_weaponData);
         }
 
