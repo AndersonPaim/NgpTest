@@ -139,6 +139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _damageFeedback: {fileID: 226481828165971455}
   _hp: 100
+  _drops:
+  - DropChance: 50
+    DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
+    ItemData: {fileID: 11400000, guid: 72be917f0237963478118faab8c71264, type: 2}
 --- !u!114 &226481828165971455
 MonoBehaviour:
   m_ObjectHideFlags: 0

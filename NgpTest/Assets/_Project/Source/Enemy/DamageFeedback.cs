@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -9,14 +10,14 @@ public class DamageFeedback : MonoBehaviour
     [SerializeField] private Material _killMaterial;
     [SerializeField] private float _materialChangeDuration;
 
-    private Material _defaultMaterial;
-    private MeshRenderer _meshRenderer;
+    private List<Material> _defaultMaterials = new();
+    private MeshRenderer[] _meshRenderers;
 
     public async void Damage()
     {
-        _meshRenderer.material = _damageMaterial;
+        SetDamageMaterial();
         await UniTask.Delay(TimeSpan.FromSeconds(_materialChangeDuration));
-        _meshRenderer.material = _defaultMaterial;
+        SetDefaultMaterial();
     }
 
     public void Kill()
@@ -27,7 +28,27 @@ public class DamageFeedback : MonoBehaviour
 
     private void Start()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();
-        _defaultMaterial = _meshRenderer.material;
+        _meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        
+        foreach (MeshRenderer meshRenderer in _meshRenderers)
+        {
+            _defaultMaterials.Add(meshRenderer.material);
+        }
+    }
+
+    private void SetDamageMaterial()
+    {
+        foreach (MeshRenderer meshRenderer in _meshRenderers)
+        {
+            meshRenderer.material = _damageMaterial;
+        }
+    }
+    
+    private void SetDefaultMaterial()
+    {
+        for (int i = 0; i < _meshRenderers.Length; i++)
+        {
+            _meshRenderers[i].material = _defaultMaterials[i];
+        }
     }
 }

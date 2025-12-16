@@ -5,14 +5,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
+    private const string SpeedAnimationName = "Speed";
+    private const string RotationAnimationName = "Rotation";
+    
     [SerializeField] private WeaponController _weaponController;
     [SerializeField] private DamageFeedback _damageFeedback;
+    [SerializeField] private Animator _anim;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private int _hp;
 
     private PlayerInputActions _input;
     private Rigidbody _rb;
+    private Quaternion _previousRotation;
 
     public void TakeDamage(int damage)
     {
@@ -64,6 +69,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Movement(Vector2 movement)
     {
+        _anim.SetFloat(SpeedAnimationName, movement.magnitude);
         movement *= _moveSpeed;
         _rb.linearVelocity = new Vector3(movement.x, _rb.linearVelocity.y, movement.y);
     }
@@ -77,6 +83,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             Vector3 hitPoint = mouseRay.GetPoint(hitDist);
             transform.LookAt(hitPoint);
+            _anim.SetFloat(RotationAnimationName, _previousRotation != transform.rotation ? 1 : 0);
+            _previousRotation = transform.rotation;
         }
     }
 

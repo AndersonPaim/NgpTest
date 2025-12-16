@@ -14,9 +14,9 @@ TagManager:
   - EnemyProjectile
   - Enemy
   - Player
-  - 
-  - 
-  - 
+  - Drop
+  - PlayerProjectile
+  - InventoryUI
   - 
   - 
   - 

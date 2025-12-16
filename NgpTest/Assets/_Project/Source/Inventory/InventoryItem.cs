@@ -3,14 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _quantityText;
 
-    public void Initialize(ItemData itemData)
+    private Item _itemData;
+    
+    public Item ItemData => _itemData;
+
+    public void Initialize(Item itemData)
     {
-        Sprite icon = InventoryManager.Instance.GetItemSprite(itemData.ItemType);
+        _itemData = itemData;
+        Sprite icon = InventoryManager.Instance.InventoryUI.GetItemSprite(itemData.ItemType);
 
         if (icon != null)
         {
@@ -21,19 +26,37 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        InventoryManager.Instance.DragItem(this);
+        InventoryManager.Instance.InventoryUI.DragItem(this);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        InventoryManager.Instance.DropItem(this);
-
-        InventorySlot inventorySlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<InventorySlot>();
+        GameObject pointerObject = eventData.pointerCurrentRaycast.gameObject;
+        
+        if (pointerObject.layer != LayerMask.NameToLayer("InventoryUI"))
+        {
+            InventoryManager.Instance.DropItem(_itemData, this);
+        }
+        else
+        {
+            InventoryManager.Instance.InventoryUI.SwapItem(this);
+        }
+        
+        InventorySlot inventorySlot = pointerObject.GetComponent<InventorySlot>();
 
         if (inventorySlot != null)
         {
             inventorySlot.AddItem(this);
         }
+    }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        InventoryManager.Instance.InventoryUI.HoverItem(_itemData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        InventoryManager.Instance.InventoryUI.StopHoverItem(_itemData);
     }
 }

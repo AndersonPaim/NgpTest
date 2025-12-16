@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1fc693873285140986be332afa14af, type: 3}
   m_Name: HealthPotionItem
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  ItemType: 0
-  SlotType: 0
-  MaxStack: 8
-  Quantity: 1
+  Item:
+    ItemType: 0
+    SlotType: 0
+    MaxStack: 8
+    Quantity: 1
+    Slot: 0
+    Description: 25% Healing
+    Name: Potion
