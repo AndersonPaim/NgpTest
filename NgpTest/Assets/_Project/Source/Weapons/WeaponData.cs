@@ -8,7 +8,4 @@ public class WeaponData : ScriptableObject
     public int Damage;
     public int ShootSpeed;
     public int FireRate;
-
-    public WeaponTypes WeaponType;
-    public ProjectilePattern ProjectilePattern;
 }

@@ -15,8 +15,9 @@ MonoBehaviour:
   Item:
     ItemType: 0
     SlotType: 0
+    EffectValue: 25
+    EffectType: 0
     MaxStack: 8
-    Quantity: 1
-    Slot: 0
+    Quantity: 4
     Description: 25% Healing
     Name: Potion

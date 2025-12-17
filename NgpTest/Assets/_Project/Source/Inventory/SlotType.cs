@@ -4,3 +4,8 @@ public enum SlotType
     Equipment,
     Weapon
 }
+
+public enum EffectType
+{
+    Healing,
+}

@@ -12,15 +12,22 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     
     public Item ItemData => _itemData;
 
-    public void Initialize(Item itemData)
+    public int ItemSlot;
+
+    public void Initialize(Item itemData, InventorySaveData savedData, int itemSlot)
     {
         _itemData = itemData;
+        ItemSlot = itemSlot;
         Sprite icon = InventoryManager.Instance.InventoryUI.GetItemSprite(itemData.ItemType);
 
         if (icon != null)
         {
             _itemIcon.sprite = icon;
-            _quantityText.text = itemData.Quantity.ToString();
+        }
+
+        if (savedData != null)
+        {
+            _quantityText.text = savedData.Quantity.ToString();
         }
     }
 
@@ -46,7 +53,10 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if (inventorySlot != null)
         {
-            inventorySlot.AddItem(this);
+            if (!inventorySlot.HasItem())
+            {
+                inventorySlot.AddItem(this);
+            }
         }
     }
 

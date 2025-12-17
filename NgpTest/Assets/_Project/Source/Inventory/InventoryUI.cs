@@ -20,11 +20,16 @@
         private Transform _lastItemParent;
         private List<InventoryItem> _inventoryItems = new();
 
+        public void UpdateUI()
+        {
+            CreateInventoryUI();
+        }
+
         public override void Open()
         {   
-            _uiPanel.DOScale(Vector3.zero, 0);
+            _uiPanel.DOScale(Vector3.zero, 0).SetUpdate(true);
             base.Open();
-            _uiPanel.DOScale(Vector3.one, _openAnimDuration);
+            _uiPanel.DOScale(Vector3.one, _openAnimDuration).SetUpdate(true);
         }
         
         public override async void Close()
@@ -56,7 +61,8 @@
 
         public void SwapItem(InventoryItem item)
         {
-            _isDraggingItem = true;
+            _isDraggingItem = false;
+            _inventorySlots[item.ItemSlot].RemoveItem();
             item.transform.SetParent(_lastItemParent);
             item.transform.localPosition = Vector3.zero;
             item.GetComponent<Image>().raycastTarget = true;
@@ -113,11 +119,11 @@
             for (int i = 0; i < saveData.InventoryItems.Count; i++)
             {
                 InventorySaveData inventorySaveData = saveData.InventoryItems[i];
-                Debug.Log("Creating inventory UI: " + inventorySaveData.Slot);
+                Debug.Log("Creating inventory UI: " + inventorySaveData.Slot + " : " + inventorySaveData.Quantity);
                 
                 InventorySlot slot = _inventorySlots[inventorySaveData.Slot];
                 InventoryItem item = Instantiate(_inventoryItemPrefab, slot.transform);
-                item.Initialize(inventorySaveData.ItemData);
+                item.Initialize(inventorySaveData.ItemData, inventorySaveData, i);
                 _inventoryItems.Add(item);
                 slot.AddItem(item);
             }
@@ -129,7 +135,7 @@
             {
                 if (slot != null)
                 {
-                    Destroy(slot.gameObject);
+                    slot.gameObject.SetActive(false);
                 }
             }
 

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -5,10 +6,12 @@ using System.Linq;
 
 public static class SaveSystem
 {
+    public static Action OnSaveData;
     public static SaveData localData { get; private set; }
 
     public static void Save()
     {
+        OnSaveData?.Invoke();
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/save.data";
         FileStream stream = new FileStream(path, FileMode.Create);

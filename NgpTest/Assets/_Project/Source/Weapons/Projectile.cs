@@ -1,20 +1,22 @@
 using System;
+using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float _lifeTime;
+    [SerializeField] private GameObject _explosionParticle;
 
     protected WeaponData WeaponData;
     private Rigidbody _rb;
 
     public virtual void Launch(WeaponData weaponData)
     {
+        StopCoroutine(DestroyDelay());
         WeaponData = weaponData;
-        //_spawnPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        //_rb.AddForce(transform.forward * weaponData.ShootForce);
-        DestroyDelay();
+        StartCoroutine(DestroyDelay());
     }
 
     protected virtual void Awake()
@@ -36,13 +38,15 @@ public class Projectile : MonoBehaviour
             damageable.TakeDamage(WeaponData.Damage);
         }
 
+        GameObject explosionParticle = ObjectPooler.Instance.SpawnFromPool(_explosionParticle);
+        explosionParticle.transform.position = transform.position;
+
         DestroyProjectile();
     }
 
-    protected virtual async void DestroyDelay()
+    protected virtual IEnumerator DestroyDelay()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(_lifeTime));
-
+        yield return new WaitForSeconds(_lifeTime);
         DestroyProjectile();
     }
 
@@ -50,20 +54,4 @@ public class Projectile : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    /*private void Update()
-    {
-        if (_hasInitialized)
-            BulletRotation();
-    }
-
-    private void BulletRotation()
-    {
-        _timer += Time.deltaTime;
-
-        float x = _timer * WeaponData.CurveSpeed * transform.right.x;
-        float y = _timer * WeaponData.CurveSpeed * transform.right.y;
-        Vector3 newPos = new(x + _spawnPoint.x, transform.eulerAngles.y, y + _spawnPoint.y);
-        transform.position = newPos;
-    }*/
 }

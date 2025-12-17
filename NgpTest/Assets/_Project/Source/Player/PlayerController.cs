@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private const string RotationAnimationName = "Rotation";
     
     [SerializeField] private WeaponController _weaponController;
+    [SerializeField] private PlayerHPUI _hpUI;
     [SerializeField] private DamageFeedback _damageFeedback;
     [SerializeField] private Animator _anim;
     [SerializeField] private float _moveSpeed;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private PlayerInputActions _input;
     private Rigidbody _rb;
     private Quaternion _previousRotation;
+    private int _initialHp;
 
     public void TakeDamage(int damage)
     {
@@ -31,6 +33,14 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             _damageFeedback.Damage();
         }
+        
+        _hpUI.UpdateHpBar(_hp, _initialHp);
+    }
+
+    public void Heal(int amount)
+    {
+        _hp = Mathf.Clamp(_hp + amount, 0, _initialHp);
+        _hpUI.UpdateHpBar(_hp, _initialHp);
     }
 
     private void Start()
@@ -55,6 +65,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody>();
         _input = new PlayerInputActions();
         _input.Enable();
+        _initialHp = _hp;
     }
 
     private void SetupEvents()

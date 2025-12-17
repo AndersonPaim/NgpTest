@@ -14,6 +14,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private ItemDrop _itemDropPrefab;
     [SerializeField] private int _inventorySlots;
     [SerializeField] private float _dropRadius;
+
+    [SerializeField] private Item _itemDebug;
     
     public InventoryUI InventoryUI => _inventoryUI;
     public static InventoryManager Instance;
@@ -26,13 +28,20 @@ public class InventoryManager : MonoBehaviour
     }
 
     [Button]
+    public void AddItem()
+    {
+        AddItemToInventory(_itemDebug);
+        _inventoryUI.UpdateUI();
+    }
+
+    [Button]
     public void CheckInventory()
     {
         SaveData saveData = SaveSystem.localData;
         
         foreach (InventorySaveData slot in saveData.InventoryItems)
         {
-            Debug.Log("INVENTORY SLOT:" + slot.ItemData.ItemType + " : " + slot.ItemData.Quantity + " :  " + slot.ItemData.Slot);
+            Debug.Log("INVENTORY SLOT:" + slot.ItemData.ItemType + " : " + slot.Slot + " : " + slot.Quantity);
         }
     }
 
@@ -54,6 +63,24 @@ public class InventoryManager : MonoBehaviour
         SaveSystem.Save();
     }
 
+    public void ConsumeItem(int itemSlot)
+    {
+        SaveData saveData = SaveSystem.localData;
+        InventorySaveData savedData = saveData.InventoryItems.Find((x) => x.Slot == itemSlot);
+
+        if (savedData != null)
+        {
+            if (savedData.Quantity > 1)
+            {
+                savedData.Quantity--;
+            }
+            else
+            {
+                saveData.InventoryItems.Remove(savedData);
+            }
+        }
+    }
+
     public void AddItemToInventory(Item item)
     {
         Debug.Log("ADD ITEM: " + item.Name);
@@ -61,45 +88,52 @@ public class InventoryManager : MonoBehaviour
 
         if (saveData.InventoryItems.Count < _inventorySlots)
         {
-            InventorySaveData existingItem = saveData.InventoryItems.Find(x => x.ItemData.ItemType == item.ItemType);
+            InventorySaveData existingItem = saveData.InventoryItems
+                .Where(x => x.ItemData.ItemType == item.ItemType)
+                .OrderBy(x => x.Quantity) 
+                .FirstOrDefault();
 
             if (existingItem == null)
             {
                 int slot = GetNextInventorySlot();
-                item.Slot = slot;
                 
                 saveData.InventoryItems.Add(new InventorySaveData
                 {
                     ItemData = item,
-                    Slot = slot
+                    Slot = slot,
+                    Quantity = item.Quantity
                 });
             }
             else
             {
-                int spaceAvailable = item.MaxStack - existingItem.ItemData.Quantity;
+                int spaceAvailable = item.MaxStack - existingItem.Quantity;
 
-                if (existingItem.ItemData.Quantity <= spaceAvailable)
+                if (existingItem.Quantity <= spaceAvailable)
                 {
-                    existingItem.ItemData.Quantity += item.Quantity;
+                    existingItem.Quantity += item.Quantity;
                 }
                 else
                 {
-                    existingItem.ItemData.Quantity = item.MaxStack;
+                    existingItem.Quantity = item.MaxStack;
 
                     int remainingQuantity = item.Quantity - spaceAvailable;
+                    
+                    Debug.Log("EXCEEDED STACK: " +  remainingQuantity);
                     
                     while (remainingQuantity > 0)
                     {
                         int quantityToAdd = Mathf.Min(remainingQuantity, item.MaxStack);
                         
                         int slot = GetNextInventorySlot();
-                        item.Slot = slot;
                         
                         saveData.InventoryItems.Add(new InventorySaveData
                         {
                             ItemData = item,
-                            Slot = slot
+                            Slot = slot,
+                            Quantity = quantityToAdd
                         });
+                        
+                        Debug.Log("NEXT STACK: " +  quantityToAdd + " : " + slot);
 
                         remainingQuantity -= quantityToAdd;
                     }

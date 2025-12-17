@@ -6,6 +6,7 @@ namespace _Project.Source.UI
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private ScreenBase _inventoryUI;
+        [SerializeField] private GameObject _gameplayHud;
         
         private PlayerInputActions _input;
 
@@ -39,12 +40,16 @@ namespace _Project.Source.UI
             if (_inventoryUI.gameObject.activeSelf)
             {
                 _currentScreen = null;
+                _gameplayHud.SetActive(true);
                 _inventoryUI.Close();
+                Time.timeScale = 1;
             }
             else
             {
                 _currentScreen = _inventoryUI;
+                _gameplayHud.SetActive(false);
                 _inventoryUI.Open();
+                Time.timeScale = 0;
             }
         }
 

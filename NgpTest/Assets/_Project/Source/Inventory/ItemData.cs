@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New ItemData", menuName = "ScriptableObjects/ItemData")]
@@ -20,9 +21,12 @@ public class Item
 {
     public ItemType ItemType;
     public SlotType SlotType;
+    [ShowIf("SlotType", SlotType.Consumable)]
+    public int EffectValue;
+    [ShowIf("SlotType", SlotType.Consumable)]
+    public EffectType EffectType;
     public int MaxStack;
     public int Quantity;
-    [HideInInspector] public int Slot;
     public string Description;
     public string Name;
 }

@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   _lifeTime: 10
+  _explosionParticle: {fileID: 964258529715377954, guid: d27bc13b21fe0f747a235ef820c621b2, type: 3}
 --- !u!54 &-1112488121680376871
 Rigidbody:
   m_ObjectHideFlags: 0

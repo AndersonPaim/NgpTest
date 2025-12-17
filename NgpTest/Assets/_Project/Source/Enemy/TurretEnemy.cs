@@ -24,6 +24,11 @@ public class TurretEnemy : Enemy
     {
         await UniTask.Delay(TimeSpan.FromSeconds(60f / _weaponData.FireRate));
 
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         Vector3 startPos = transform.position;
         float angle = 0;
         float angleStep = 360 / _spawnPoints;
