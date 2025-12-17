@@ -63,7 +63,6 @@
 
         private void UseHotbar(int index)
         {
-            Debug.Log("UseHotbar: " + index);
             GameObject slot = _inventorySlots[index];
             
             slot.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.1f).SetUpdate(true).OnComplete
@@ -101,8 +100,6 @@
                 if (saveData.InventoryItems[i].Slot <= _inventorySlots.Count)
                 {
                     InventorySaveData inventorySaveData = saveData.InventoryItems[i];
-                    
-                    
                     GameObject slot = _inventorySlots[inventorySaveData.Slot];
                     HotbarItem item = Instantiate(_hotbarItemPrefab, slot.transform);
                     item.Initialize(inventorySaveData.ItemData, inventorySaveData);

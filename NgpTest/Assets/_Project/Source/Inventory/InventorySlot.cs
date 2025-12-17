@@ -6,7 +6,7 @@ public class InventorySlot : MonoBehaviour
     private InventoryItem _item;
     private int _slotIndex;
 
-    public InventoryItem Item;
+    //public InventoryItem Item;
 
     public void RemoveItem()
     {
@@ -30,14 +30,14 @@ public class InventorySlot : MonoBehaviour
         SaveData saveData = SaveSystem.localData;
         AttachItem(item);
 
-        InventorySaveData inventorySaveData = saveData.InventoryItems.Find((x) => x.Slot == item.ItemSlot);
-        item.ItemSlot = _slotIndex;
-        
+        InventorySaveData inventorySaveData = saveData.InventoryItems.Find((x) => x.ItemData.ItemType == item.ItemData.ItemType);
+
         if (inventorySaveData != null)
         {
-            Debug.Log("CHANGE ITEM SLOT FROM: " + item.ItemSlot + " TO: " + _slotIndex);
             inventorySaveData.Slot = _slotIndex;
         }
+        
+        item.ItemSlot = _slotIndex;
         
         SaveSystem.Save();
     }

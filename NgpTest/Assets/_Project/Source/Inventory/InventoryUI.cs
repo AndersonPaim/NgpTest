@@ -123,7 +123,7 @@
                 InventoryItem item = Instantiate(_inventoryItemPrefab, slot.transform);
                 item.Initialize(inventorySaveData.ItemData, inventorySaveData, i);
                 _inventoryItems.Add(item);
-                slot.AddItem(item);
+                slot.AttachItem(item);
             }
         }
         

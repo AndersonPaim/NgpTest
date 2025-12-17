@@ -14,35 +14,14 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private ItemDrop _itemDropPrefab;
     [SerializeField] private int _inventorySlots;
     [SerializeField] private float _dropRadius;
-
-    [SerializeField] private Item _itemDebug;
     
     public InventoryUI InventoryUI => _inventoryUI;
     public static InventoryManager Instance;
     
-
     public bool HasSlotAvailable()
     {
         SaveData saveData = SaveSystem.localData;
         return saveData.InventoryItems.Count < _inventorySlots;
-    }
-
-    [Button]
-    public void AddItem()
-    {
-        AddItemToInventory(_itemDebug);
-        _inventoryUI.UpdateUI();
-    }
-
-    [Button]
-    public void CheckInventory()
-    {
-        SaveData saveData = SaveSystem.localData;
-        
-        foreach (InventorySaveData slot in saveData.InventoryItems)
-        {
-            Debug.Log("INVENTORY SLOT:" + slot.ItemData.ItemType + " : " + slot.Slot + " : " + slot.Quantity);
-        }
     }
 
     public void DropItem(Item item, InventoryItem inventoryItem)
@@ -58,7 +37,6 @@ public class InventoryManager : MonoBehaviour
         SaveData saveData = SaveSystem.localData;
         InventorySaveData existingItem = saveData.InventoryItems.Find(x => x.ItemData.ItemType == item.ItemType);
         saveData.InventoryItems.Remove(existingItem);
-        //saveData.InventoryItems.Sort((data1, data2) => data1.Slot.CompareTo(data2.Slot));
         SaveSystem.Save();
     }
 
@@ -135,7 +113,6 @@ public class InventoryManager : MonoBehaviour
                 }
             }
             
-            //saveData.InventoryItems.Sort((data1, data2) => data1.Slot.CompareTo(data2.Slot));
             SaveSystem.Save();
         }
     }

@@ -53,7 +53,18 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if (inventorySlot != null)
         {
-            if (!inventorySlot.HasItem())
+            bool hasActiveChild = false;
+    
+            foreach (Transform child in inventorySlot.transform)
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    hasActiveChild = true;
+                    break;
+                }
+            }
+
+            if (!hasActiveChild)
             {
                 inventorySlot.AddItem(this);
             }
