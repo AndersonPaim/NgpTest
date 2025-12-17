@@ -24,6 +24,11 @@ public class TurretEnemy : Enemy
     {
         await UniTask.Delay(TimeSpan.FromSeconds(60f / _weaponData.FireRate));
 
+        if (gameObject == null)
+        {
+            return;
+        }
+
         if (!gameObject.activeInHierarchy)
         {
             return;

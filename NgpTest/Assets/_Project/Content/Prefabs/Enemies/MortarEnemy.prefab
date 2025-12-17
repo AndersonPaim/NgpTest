@@ -147,14 +147,17 @@ MonoBehaviour:
   _damageFeedback: {fileID: 3498794291155832237}
   _hp: 125
   _drops:
-  - DropChance: 50
+  - DropChance: 25
     DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
     ItemData: {fileID: 11400000, guid: 72be917f0237963478118faab8c71264, type: 2}
+  - DropChance: 25
+    DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
+    ItemData: {fileID: 11400000, guid: 0935ae514b17ba4498306361dd2229ca, type: 2}
   _aoeAttackPrefab: {fileID: 1242829260562099599, guid: b5ace2b605d7f544e810f210582bdb49, type: 3}
   _attackInterval: 5
   _bombsPerAttack: 25
   _explosionDelay: 1
-  _explosionRange: 7
+  _explosionRange: 2.5
   _attackRange: 20
   _explosionDamage: 50
 --- !u!114 &3498794291155832237

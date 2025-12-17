@@ -119,8 +119,6 @@
             for (int i = 0; i < saveData.InventoryItems.Count; i++)
             {
                 InventorySaveData inventorySaveData = saveData.InventoryItems[i];
-                Debug.Log("Creating inventory UI: " + inventorySaveData.Slot + " : " + inventorySaveData.Quantity);
-                
                 InventorySlot slot = _inventorySlots[inventorySaveData.Slot];
                 InventoryItem item = Instantiate(_inventoryItemPrefab, slot.transform);
                 item.Initialize(inventorySaveData.ItemData, inventorySaveData, i);

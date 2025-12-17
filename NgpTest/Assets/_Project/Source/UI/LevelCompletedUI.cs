@@ -52,6 +52,7 @@ public class LevelCompletedUI : ScreenBase
 
     private void HandleHomeButtonClicked()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 }

@@ -174,9 +174,12 @@ MonoBehaviour:
   _damageFeedback: {fileID: 4941156384205321644}
   _hp: 100
   _drops:
-  - DropChance: 50
+  - DropChance: 25
     DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
     ItemData: {fileID: 11400000, guid: 72be917f0237963478118faab8c71264, type: 2}
+  - DropChance: 25
+    DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
+    ItemData: {fileID: 11400000, guid: 0935ae514b17ba4498306361dd2229ca, type: 2}
   _weaponData: {fileID: 11400000, guid: 1b79e53aca289ea4ab92dc91a5fffc14, type: 2}
   _rotationSpeed: 0
   _spawnPoints: 6

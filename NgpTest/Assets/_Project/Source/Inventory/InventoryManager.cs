@@ -58,7 +58,7 @@ public class InventoryManager : MonoBehaviour
         SaveData saveData = SaveSystem.localData;
         InventorySaveData existingItem = saveData.InventoryItems.Find(x => x.ItemData.ItemType == item.ItemType);
         saveData.InventoryItems.Remove(existingItem);
-        saveData.InventoryItems.Sort((data1, data2) => data1.Slot.CompareTo(data2.Slot));
+        //saveData.InventoryItems.Sort((data1, data2) => data1.Slot.CompareTo(data2.Slot));
         SaveSystem.Save();
     }
 
@@ -78,11 +78,11 @@ public class InventoryManager : MonoBehaviour
                 saveData.InventoryItems.Remove(savedData);
             }
         }
+        SaveSystem.Save();
     }
 
     public void AddItemToInventory(Item item)
     {
-        Debug.Log("ADD ITEM: " + item.Name);
         SaveData saveData = SaveSystem.localData;
 
         if (saveData.InventoryItems.Count < _inventorySlots)
@@ -135,7 +135,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
             
-            saveData.InventoryItems.Sort((data1, data2) => data1.Slot.CompareTo(data2.Slot));
+            //saveData.InventoryItems.Sort((data1, data2) => data1.Slot.CompareTo(data2.Slot));
             SaveSystem.Save();
         }
     }

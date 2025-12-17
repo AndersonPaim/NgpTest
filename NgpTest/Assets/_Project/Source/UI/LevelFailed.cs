@@ -31,12 +31,14 @@ public class LevelFailedUI : ScreenBase
 
     private void HandleHomeButtonClicked()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 
     private void HandleRestartButtonClicked()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Time.timeScale = 1;
         SceneManager.LoadScene(currentSceneIndex);
     }
 }

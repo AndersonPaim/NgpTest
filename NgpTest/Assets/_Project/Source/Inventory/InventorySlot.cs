@@ -6,6 +6,8 @@ public class InventorySlot : MonoBehaviour
     private InventoryItem _item;
     private int _slotIndex;
 
+    public InventoryItem Item;
+
     public void RemoveItem()
     {
         _item = null;

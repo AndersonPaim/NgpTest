@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MainMenuUI : ScreenBase
 {
     [SerializeField] private Button _playButton;
+    [SerializeField] private Button _quitButton;
     
     private void Start()
     {
@@ -18,12 +19,15 @@ public class MainMenuUI : ScreenBase
 
     private void SetupEvents()
     {
+        Time.timeScale = 1;
         _playButton.onClick.AddListener(HandlePlayButtonClicked);
+        _quitButton.onClick.AddListener(HandleQuitButtonClicked);
     }
         
     private void DestroyEvents()
     {
         _playButton.onClick.RemoveAllListeners();
+        _quitButton.onClick.RemoveAllListeners();
     }
     
     private void HandlePlayButtonClicked()
@@ -34,5 +38,10 @@ public class MainMenuUI : ScreenBase
         {
             SceneManager.LoadScene(currentSceneIndex + 1);
         }
+    }
+
+    private void HandleQuitButtonClicked()
+    {
+        Application.Quit();
     }
 }

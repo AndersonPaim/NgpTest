@@ -9,16 +9,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Enemy> _enemies = new();
     [SerializeField] private ScreenBase _levelCompleteScreen;
     [SerializeField] private ScreenBase _levelFailedScreen;
-    [SerializeField] private int _endGameDelay = 1;
     
     private int _enemiesDead = 0;
     
     private void Start()
     {
-        Time.timeScale = 1;
         SetupEvents();
     }
 
+    private void OnEnable()
+    {
+        _enemiesDead = 0;
+        Time.timeScale = 1; 
+    }
+    
     private void OnDestroy()
     {
         DestroyEvents();
@@ -44,21 +48,19 @@ public class LevelManager : MonoBehaviour
         _player.OnDeath -= HandlePlayerDeath;
     }
 
-    private async void HandleEnemyDeath()
+    private void HandleEnemyDeath()
     {
         _enemiesDead++;
 
         if (_enemiesDead == _enemies.Count)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_endGameDelay));
             Time.timeScale = 0;
             _levelCompleteScreen.Open();
         }
     }
 
-    private async void HandlePlayerDeath()
+    private void HandlePlayerDeath()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(_endGameDelay));
         Time.timeScale = 0;
         _levelFailedScreen.Open();
     }

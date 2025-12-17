@@ -15,3 +15,5 @@ MonoBehaviour:
   Sprites:
   - ItemType: 0
     Sprite: {fileID: 21300000, guid: ffb0b492118532f42a342e78771e1a6c, type: 3}
+  - ItemType: 1
+    Sprite: {fileID: 21300000, guid: 0e65c4b590a03b24380392b9e8bf81d9, type: 3}

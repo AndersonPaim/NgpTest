@@ -9,8 +9,6 @@ public class SimpleEnemy : Enemy
     [SerializeField] private Transform _shootPosition;
     [SerializeField] private WeaponData _weaponData;
     [SerializeField] private float _rotationSpeed;
-
-    private bool _canSeeThreat = false;
     
     private void Start()
     {
@@ -44,8 +42,7 @@ public class SimpleEnemy : Enemy
         
         Shoot();
     }
-
-
+    
     private void LookAtPlayer()
     {
         Vector3 directionToPlayer = _player.transform.position - transform.position;

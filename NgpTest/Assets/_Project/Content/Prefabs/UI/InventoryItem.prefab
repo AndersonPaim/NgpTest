@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6541990007185237857}
   - component: {fileID: 8998167042138968154}
   - component: {fileID: 3748550429970381391}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: QuantityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 4411287787676630869}
   - component: {fileID: 7223135475851714233}
   - component: {fileID: 2129455911897456174}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: InventoryItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
