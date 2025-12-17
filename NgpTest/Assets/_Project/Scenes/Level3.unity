@@ -3033,7 +3033,6 @@ MonoBehaviour:
   - {fileID: 5895645563371225437}
   _levelCompleteScreen: {fileID: 211691720}
   _levelFailedScreen: {fileID: 1142403405}
-  _endGameDelay: 1
 --- !u!1 &392558805
 GameObject:
   m_ObjectHideFlags: 0
@@ -11052,7 +11051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4911927743561189380, guid: b411ed3abde3f694a8a81183e301c40c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9103045871997694912, guid: b411ed3abde3f694a8a81183e301c40c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11995,7 +11994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4767665019263132979, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5308509587998168400, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: _weaponData
@@ -12335,7 +12334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4767665019263132979, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5308509587998168400, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: _weaponData
@@ -17932,7 +17931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4767665019263132979, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5308509587998168400, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: _weaponData
@@ -19224,7 +19223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4911927743561189380, guid: b411ed3abde3f694a8a81183e301c40c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5779931032423608357, guid: b411ed3abde3f694a8a81183e301c40c, type: 3}
       propertyPath: _drops.Array.size
@@ -19408,7 +19407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4767665019263132979, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5308509587998168400, guid: dec33c9c1ac7e8d448834d2623dd5605, type: 3}
       propertyPath: _weaponData
