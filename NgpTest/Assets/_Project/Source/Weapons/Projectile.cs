@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float _lifeTime;
     [SerializeField] private GameObject _explosionParticle;
+    [SerializeField] private bool _isDestructible;
 
     protected WeaponData WeaponData;
     private Rigidbody _rb;
@@ -36,12 +37,17 @@ public class Projectile : MonoBehaviour
         if (damageable != null)
         {
             damageable.TakeDamage(WeaponData.Damage);
+
+            if (!_isDestructible)
+            {
+                DestroyProjectile();
+            }
         }
 
-        GameObject explosionParticle = ObjectPooler.Instance.SpawnFromPool(_explosionParticle);
-        explosionParticle.transform.position = transform.position;
-
-        DestroyProjectile();
+        if (_isDestructible)
+        {
+            DestroyProjectile();
+        }
     }
 
     protected virtual IEnumerator DestroyDelay()
@@ -52,6 +58,8 @@ public class Projectile : MonoBehaviour
 
     protected virtual void DestroyProjectile()
     {
+        GameObject explosionParticle = ObjectPooler.Instance.SpawnFromPool(_explosionParticle);
+        explosionParticle.transform.position = transform.position;
         gameObject.SetActive(false);
     }
 }

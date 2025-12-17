@@ -48,8 +48,12 @@ public class TurretEnemy : Enemy
             {
                 projectile.Launch(_weaponData);
             }
-
-            projectile.GetComponent<Rigidbody>().linearVelocity = new Vector3(moveDir.x, 0, moveDir.y);
+            
+            Vector3 moveDirection = new Vector3(moveDir.x, 0, moveDir.y);
+            Quaternion rotation = transform.rotation;
+            Vector3 rotatedDirection = rotation * moveDirection;
+            
+            projectile.GetComponent<Rigidbody>().linearVelocity = rotatedDirection;
 
             angle += angleStep;
         }

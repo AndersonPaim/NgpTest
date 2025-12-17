@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1333028634255051213}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.99}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,10 +42,10 @@ GameObject:
   - component: {fileID: 9103045871997694912}
   - component: {fileID: 530252602891379945}
   - component: {fileID: 1044869116958810318}
-  - component: {fileID: 5779931032423608357}
   - component: {fileID: 226481828165971455}
   - component: {fileID: 3474813418526332638}
   - component: {fileID: 8504872332691369337}
+  - component: {fileID: 1117276361078243987}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.48, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2448456129719172739}
@@ -125,24 +125,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5779931032423608357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4911927743561189380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3968102fad7dd3488b5a4cb66079e57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  _damageFeedback: {fileID: 226481828165971455}
-  _hp: 100
-  _drops:
-  - DropChance: 50
-    DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
-    ItemData: {fileID: 11400000, guid: 72be917f0237963478118faab8c71264, type: 2}
 --- !u!114 &226481828165971455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,3 +189,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1117276361078243987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911927743561189380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c7c786bbdd4b2494d1ec1570fc263e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleEnemy
+  _damageFeedback: {fileID: 226481828165971455}
+  _hp: 100
+  _drops:
+  - DropChance: 100
+    DropPrefab: {fileID: 2431795226810036211, guid: b25a4eb896126e84ab861c81d155b112, type: 3}
+    ItemData: {fileID: 11400000, guid: 72be917f0237963478118faab8c71264, type: 2}
+  _player: {fileID: 0}
+  _shootPosition: {fileID: 2448456129719172739}
+  _weaponData: {fileID: 11400000, guid: ee85325da5cbae249ba43741af0447c2, type: 2}
+  _rotationSpeed: 5

@@ -58,6 +58,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   _lifeTime: 10
   _explosionParticle: {fileID: 964258529715377954, guid: 0b4d3b230b03d8449badc1bec594fe7a, type: 3}
+  _isDestructible: 1
 --- !u!54 &-1112488121680376871
 Rigidbody:
   m_ObjectHideFlags: 0

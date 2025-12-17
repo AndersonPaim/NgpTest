@@ -20,8 +20,6 @@ public class MortarEnemy : Enemy
 
     private async void Shoot()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(_attackInterval));
-
         if (!gameObject.activeSelf)
         {
             return;
@@ -44,6 +42,8 @@ public class MortarEnemy : Enemy
                 aoeAttack.Explode(_explosionDelay, _explosionRange, _explosionDamage);
             }
         }
+        
+        await UniTask.Delay(TimeSpan.FromSeconds(_attackInterval));
 
         Shoot();
     }

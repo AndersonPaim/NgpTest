@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    public Action OnDeath;
+    
     [SerializeField] private DamageFeedback _damageFeedback;
     [SerializeField] private int _hp;
     [SerializeField] private List<DropData> _drops = new();
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour, IDamageable
         DropItem();
         _damageFeedback.Kill();
         gameObject.SetActive(false);
+        OnDeath?.Invoke();
     }
 
     protected virtual void DropItem()

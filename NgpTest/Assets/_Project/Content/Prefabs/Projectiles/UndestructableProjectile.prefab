@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6053737551794589638}
   - component: {fileID: 576606438111645779}
   - component: {fileID: -1112488121680376871}
-  m_Layer: 6
-  m_Name: DefaultEnemyProjectile
+  m_Layer: 7
+  m_Name: UndestructableProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 1.475}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94abbaac24f6f4d42a01c93203364a3c, type: 2}
+  - {fileID: 2100000, guid: aa658147dd8375248bd5bc61181439c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   _lifeTime: 10
-  _explosionParticle: {fileID: 964258529715377954, guid: 2f2f55e6b12bf714c9379894df762819, type: 3}
-  _isDestructible: 1
+  _explosionParticle: {fileID: 7994423443148318402, guid: 9f89279a4ce187b4eacb261a3940ec09, type: 3}
+  _isDestructible: 0
 --- !u!54 &-1112488121680376871
 Rigidbody:
   m_ObjectHideFlags: 0

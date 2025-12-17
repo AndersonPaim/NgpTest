@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
+    public Action OnDeath;
+    
     private const string SpeedAnimationName = "Speed";
     private const string RotationAnimationName = "Rotation";
     
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (_hp <= 0)
         {
             _damageFeedback.Kill();
+            OnDeath?.Invoke();
         }
         else
         {

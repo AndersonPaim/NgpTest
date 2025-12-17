@@ -47,7 +47,6 @@ public class InventoryManager : MonoBehaviour
 
     public void DropItem(Item item, InventoryItem inventoryItem)
     {
-        Debug.Log("DROP ITEM: " + item.Name);
         ItemDrop itemDrop = ObjectPooler.Instance.SpawnFromPool(_itemDropPrefab.gameObject).GetComponent<ItemDrop>();
         itemDrop.SetItem(item);
         Destroy(inventoryItem.gameObject);
@@ -118,8 +117,6 @@ public class InventoryManager : MonoBehaviour
 
                     int remainingQuantity = item.Quantity - spaceAvailable;
                     
-                    Debug.Log("EXCEEDED STACK: " +  remainingQuantity);
-                    
                     while (remainingQuantity > 0)
                     {
                         int quantityToAdd = Mathf.Min(remainingQuantity, item.MaxStack);
@@ -133,8 +130,6 @@ public class InventoryManager : MonoBehaviour
                             Quantity = quantityToAdd
                         });
                         
-                        Debug.Log("NEXT STACK: " +  quantityToAdd + " : " + slot);
-
                         remainingQuantity -= quantityToAdd;
                     }
                 }
